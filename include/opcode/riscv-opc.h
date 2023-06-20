@@ -990,6 +990,8 @@
 #define MATCH_V_OP_N_VV 0x00002057
 #define MATCH_V_OP_N_VR 0x00003057
 #define MATCH_V_OP_C_VV 0x02002057
+/* Ternary operators - compressed, only vector-vector operations max/min supported */
+#define MATCH_V_OP_T_VV 0x02004057
 #define MATCH_V_OP_C_VR 0x02003057
 #define	MATCH_V_OP_B_VV_PS1 0x00003057
 #define	MATCH_V_OP_H_VV_PS1 0x00002057
@@ -1000,6 +1002,8 @@
 #define	MATCH_V_OP_ML_H_VV 0x00000077
 #define MATCH_V_OP_ML_N_VV 0x00002077
 #define MATCH_V_OP_ML_C_VV 0x00003077
+// Ternary
+#define MATCH_V_OP_ML_T_VV 0x00004077
 
 #define MATCH_V_OP_H_VV_S0 0x00000057
 #define MATCH_V_OP_H_VV_S1 0x00002057
