@@ -2650,6 +2650,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.min.sc.n",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MIN|MATCH_V_OP_N_VR,		MASK_V_OP,	match_opcode,	0},
 {"pv.min.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MIN|MATCH_V_OP_C_VV,		MASK_V_OP,	match_opcode,	0},
 {"pv.min.sc.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MIN|MATCH_V_OP_C_VR,		MASK_V_OP,	match_opcode,	0},
+/* XpulpTNN vectorial min: only vector-vector, signed operation on 20+20 compressed elements supported */
+{"pv.min.t",      "Xpulpnn", "d,s,t",        MATCH_V_OP_MIN|MATCH_V_OP_T_VV,         MASK_V_OP,      match_opcode,   0},
 /* Xpulpnn vectorial minu: nibble, crumb */
 {"pv.minu.n",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MINU|MATCH_V_OP_N_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.minu.sc.n",	"Xpulpnn", "d,s,t",	MATCH_V_OP_MINU|MATCH_V_OP_N_VR,	MASK_V_OP,	match_opcode,	0},
@@ -2660,6 +2662,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.max.sc.n",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MAX|MATCH_V_OP_N_VR,		MASK_V_OP,	match_opcode,	0},
 {"pv.max.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MAX|MATCH_V_OP_C_VV,		MASK_V_OP,	match_opcode,	0},
 {"pv.max.sc.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MAX|MATCH_V_OP_C_VR,		MASK_V_OP,	match_opcode,	0},
+/* XpulpTNN vectorial max: only vector-vector, signed operation on 20+20 compressed elements supported */
+{"pv.max.t",    "Xpulpnn", "d,s,t",        MATCH_V_OP_MAX|MATCH_V_OP_T_VV,         MASK_V_OP,      match_opcode,   0},
 /* Xpulpnn vectorial maxu: nibble, crumb */
 {"pv.maxu.n",		"Xpulpnn", "d,s,t",	MATCH_V_OP_MAXU|MATCH_V_OP_N_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.maxu.sc.n",	"Xpulpnn", "d,s,t",	MATCH_V_OP_MAXU|MATCH_V_OP_N_VR,	MASK_V_OP,	match_opcode,	0},
@@ -2728,7 +2732,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.sdotsp.sc.n",	"Xpulpnn", "d,s,t",	MATCH_V_OP_SDOTUSP|MATCH_V_OP_N_VR,	MASK_V_OP,	match_opcode,	0},
 {"pv.sdotsp.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_SDOTUSP|MATCH_V_OP_C_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.sdotsp.sc.c",	"Xpulpnn", "d,s,t",	MATCH_V_OP_SDOTUSP|MATCH_V_OP_C_VR,	MASK_V_OP,	match_opcode,	0},
-
+/* Threshold&Compress instruction*/
+{"pv.thrc",   "Xpulpnn", "d,s,t", MATCH_THRC,  MASK_PALU,  match_opcode, 0},
 /* Xpulpnn quantization: nibble, crumble */
 {"pv.qnt.n",		"Xpulpnn", "d,s,t",	MATCH_V_OP_PACKLO|MATCH_V_OP_N_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.qnt.c",		"Xpulpnn", "d,s,t",	MATCH_V_OP_PACKLO|MATCH_V_OP_C_VV,	MASK_V_OP,	match_opcode,	0},
@@ -2843,6 +2848,11 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.smlsdotsp.b",		"Xpulpnn", "d,s,bi",	MATCH_V_OP_MLSDOTSP | MATCH_V_OP_ML_B_VV,	 MASK_V_OP,	 match_opcode,	0},
 {"pv.smlsdotsp.n",		"Xpulpnn", "d,s,bi",	MATCH_V_OP_MLSDOTSP | MATCH_V_OP_ML_N_VV,	 MASK_V_OP,	 match_opcode,	0},
 {"pv.smlsdotsp.c",    "Xpulpnn", "d,s,bi",  MATCH_V_OP_MLSDOTSP | MATCH_V_OP_ML_C_VV,  MASK_V_OP,  match_opcode,  0},
+/* Compressed MAC instructions - full signed & unsigned support */
+{"pv.smlsdotup.t",    "Xpulpnn" "d,s,bi",  MATCH_V_OP_MLSDOTUP | MATCH_V_OP_ML_T_VV,  MASK_V_OP,  match_opcode,  0},
+{"pv.smlsdotusp.t",   "Xpulpnn", "d,s,bi",  MATCH_V_OP_MLSDOTUSP | MATCH_V_OP_ML_T_VV,  MASK_V_OP,  match_opcode,  0},
+{"pv.smlsdotsup.t",   "Xpulpnn", "d,s,bi",  MATCH_V_OP_MLSDOTSUP | MATCH_V_OP_ML_T_VV,  MASK_V_OP,  match_opcode,  0},
+{"pv.smlsdotsp.t",   "Xpulpnn", "d,s,bi",  MATCH_V_OP_MLSDOTSP | MATCH_V_OP_ML_T_VV,  MASK_V_OP,  match_opcode,  0},
 
 /***********************************************************************************************************************/
 /**************************************             Gap9             ***************************************************/
